@@ -34,5 +34,5 @@ void Exception::setMessage(char * msg)
 
 ostream & Exception::operator<<(ostream & stream, const Exception & except)
 {
-	return 
+	return ;
 }

@@ -23,28 +23,21 @@ private:
 	int m_start_index;
 };
 
-
-
-
-
-
-
 template<class T>
-Array::Array() :m_array(nullptr), m_length(0), m_start_index(0)
+Array<T>::Array() :m_array(nullptr), m_length(0), m_start_index(0)
 {
 }
 
 template<class T>
-Array::Array(int length, int start_index) : m_array(nullptr), m_length(length), m_start_index(start_index)
+Array<T>::Array(int length, int start_index) : m_array(nullptr), m_length(length), m_start_index(start_index)
 {
-
 }
 template<class T>
-Array::Array(const Array & copy) : m_array(nullptr), m_length(0), m_start_index(0)
+Array<T>::Array(const Array & copy) : m_array(nullptr), m_length(0), m_start_index(0)
 {
 	m_length = copy.m_length;
 	m_start_index = copy.m_start_index;
-
+	m_array = new T[m_length];
 	if (copy.m_array != nullptr)
 	{
 		for (int i = getStartIndex(); i < getLength(); ++i)
@@ -54,11 +47,11 @@ Array::Array(const Array & copy) : m_array(nullptr), m_length(0), m_start_index(
 	}
 }
 template<class T>
-Array::~Array()
+Array<T>::~Array()
 {
 }
 template<class T>
-Array & Array::operator=(const Array & rhs)
+Array<T> & Array<T>::operator=(const Array & rhs)
 {
 	if (this != &rhs)
 	{
@@ -68,6 +61,7 @@ Array & Array::operator=(const Array & rhs)
 		m_start_index = rhs.m_start_index;
 		if (rhs.m_array != nullptr)
 		{
+			m_array = new T[m_length];
 			for (int i = getStartIndex(); i < getLength(); ++i)
 			{
 				m_array[i] = rhs.m_array[i];
@@ -78,28 +72,30 @@ Array & Array::operator=(const Array & rhs)
 	return *this;
 }
 template<class T>
-T & Array::operator[](int index)
+T & Array<T>::operator[](int index)
 {
 
 	return this[index];
 }
 template<class T>
-int Array::getStartIndex()
+int Array<T>::getStartIndex()
 {
 	return m_start_index;
 }
 template<class T>
-void Array::setStartIndex(int start_index)
+void Array<T>::setStartIndex(int start_index)
 {
 	m_start_index = start_index;
 }
+
 template<class T>
-int Array::getLength()
+int Array<T>::getLength()
 {
 	return m_length;
 }
+
 template<class T>
-void Array::setLength(int length)
+void Array<T>::setLength(int length)
 {
 	m_length = length;
 }
